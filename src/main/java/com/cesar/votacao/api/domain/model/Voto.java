@@ -28,8 +28,6 @@ public class Voto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String associadoId;
-
     private String cpfAssociado;
 
     @Enumerated(EnumType.STRING)
@@ -39,8 +37,7 @@ public class Voto {
     @JoinColumn(name = "sessao_id")
     private SessaoVotacao sessao;
 
-    public Voto(String associadoId, String cpfAssociado, OpcaoVoto opcao, SessaoVotacao sessao) {
-        this.associadoId = associadoId;
+    public Voto(String cpfAssociado, OpcaoVoto opcao, SessaoVotacao sessao) {
         this.cpfAssociado = cpfAssociado;
         this.opcao = opcao;
         this.sessao = sessao;

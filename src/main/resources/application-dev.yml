@@ -18,3 +18,7 @@ logging:
     console:
       enabled: true
       path: /h2-console
+
+
+validador-cpf:
+  url: http://localhost:3000/users
