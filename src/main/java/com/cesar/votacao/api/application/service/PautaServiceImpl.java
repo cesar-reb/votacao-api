@@ -20,17 +20,21 @@ public class PautaServiceImpl implements PautaService {
     @Override
     @Transactional
     public Pauta criarPauta(String titulo, String descricao, UUID usuarioCriadorId) {
+        log.info("criando pauta");
         var pauta = new Pauta(titulo, descricao, usuarioCriadorId);
         return pautaRepository.save(pauta);
     }
 
     @Override
     @Transactional
-    public void abrirSessao(Long pautaId, long duracaoEmMinutos) {
+    public void abrirSessao(Long pautaId, Long duracaoEmMinutos) {
+
+        log.info("abrindo sessão");
         Pauta pauta = pautaRepository.findById(pautaId)
                 .orElseThrow(() -> new IllegalArgumentException("Pauta não encontrada com ID: " + pautaId));
 
-        pauta.abrirSessao(duracaoEmMinutos);
+        var duracao = duracaoEmMinutos != null ? duracaoEmMinutos : 1;
+        pauta.abrirSessao(duracao);
         pautaRepository.save(pauta);
     }
 }

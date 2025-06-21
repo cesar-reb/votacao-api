@@ -16,9 +16,8 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(
-        uniqueConstraints = {
-                @UniqueConstraint(columnNames = {"pauta_id", "associadoId"})
-        }
+        name = "voto",
+        uniqueConstraints = @UniqueConstraint(name = "UK_voto_sessao_associado", columnNames = {"sessao_id", "cpfAssociado"})
 )
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter

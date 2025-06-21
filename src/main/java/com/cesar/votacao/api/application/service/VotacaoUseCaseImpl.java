@@ -24,7 +24,7 @@ public class VotacaoUseCaseImpl implements VotacaoUseCase {
 
     @Override
     @Transactional
-    public void votar(String cpfAssociado, Long pautaId, String voto) {
+    public void votar(String cpfAssociado, Long pautaId, Voto.OpcaoVoto voto) {
 
         var pauta = pautaRepository.findById(pautaId)
                 .orElseThrow(() -> new IllegalArgumentException("Pauta não encontrada com ID: " + pautaId));
@@ -34,7 +34,7 @@ public class VotacaoUseCaseImpl implements VotacaoUseCase {
         assegurarVotoUnicoPorSessao(cpfAssociado, sessao);
         assegurarVotoValido(cpfAssociado);
 
-        var votoEntity = new Voto(cpfAssociado, Voto.OpcaoVoto.valueOf(voto.toUpperCase()), sessao);
+        var votoEntity = new Voto(cpfAssociado, voto, sessao);
         votoRepository.save(votoEntity);
     }
 

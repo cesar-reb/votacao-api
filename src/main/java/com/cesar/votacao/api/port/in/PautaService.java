@@ -6,5 +6,5 @@ import java.util.UUID;
 
 public interface PautaService {
     Pauta criarPauta(String titulo, String descricao, UUID usuarioCriadorId);
-    void abrirSessao(Long pautaId, long duracaoEmMinutos);
+    void abrirSessao(Long pautaId, Long duracaoEmMinutos);
 }

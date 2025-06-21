@@ -38,7 +38,7 @@ public class SessaoVotacao {
     private List<Voto> votos = new ArrayList<>();
 
 
-    public SessaoVotacao(Pauta pauta, long minutosDuracao) {
+    public SessaoVotacao(Pauta pauta, Long minutosDuracao) {
         this.pauta = pauta;
         this.inicio = LocalDateTime.now();
         this.fim = this.inicio.plusMinutes(minutosDuracao);
