@@ -1,4 +1,4 @@
-package com.cesar.votacao.api.adapter.out.persistence;
+package com.cesar.votacao.api.port.dto;
 
 public interface ContagemVotoProjecao {
     String getOpcao();

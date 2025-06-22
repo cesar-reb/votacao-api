@@ -1,6 +1,6 @@
 package com.cesar.votacao.api.port.out;
 
-import com.cesar.votacao.api.adapter.out.persistence.ContagemVotoProjecao;
+import com.cesar.votacao.api.port.dto.ContagemVotoProjecao;
 import com.cesar.votacao.api.domain.model.Voto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

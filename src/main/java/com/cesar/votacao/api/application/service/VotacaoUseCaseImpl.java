@@ -1,6 +1,6 @@
 package com.cesar.votacao.api.application.service;
 
-import com.cesar.votacao.api.adapter.out.persistence.ContagemVotoProjecao;
+import com.cesar.votacao.api.port.dto.ContagemVotoProjecao;
 import com.cesar.votacao.api.domain.model.ResultadoVotacao;
 import com.cesar.votacao.api.domain.model.SessaoVotacao;
 import com.cesar.votacao.api.domain.model.Voto;

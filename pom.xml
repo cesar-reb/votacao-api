@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.cesar</groupId>
 	<artifactId>votacao-api</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>votacao-api</name>
 	<description>Projeto Spring Boot que expõe uma API REST para gerenciamento de pautas e sessões de votação</description>
 	<url/>

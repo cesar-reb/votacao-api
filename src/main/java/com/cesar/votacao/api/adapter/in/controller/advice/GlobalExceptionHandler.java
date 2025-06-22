@@ -1,13 +1,17 @@
 package com.cesar.votacao.api.adapter.in.controller.advice;
 
 import com.cesar.votacao.api.domain.exception.SessaoJaAbertaException;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.time.LocalDateTime;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -24,7 +28,25 @@ public class GlobalExceptionHandler {
         );
     }
 
-    // Exemplo genérico para outras exceções de negócio:
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Map<String, Object>> handleValidationErrors(MethodArgumentNotValidException ex) {
+        var errors = ex.getBindingResult().getFieldErrors().stream()
+                .collect(Collectors.toMap(
+                        FieldError::getField,
+                        DefaultMessageSourceResolvable::getDefaultMessage,
+                        (a, b) -> a
+                ));
+
+        return ResponseEntity.badRequest().body(
+                Map.of(
+                        "timestamp", LocalDateTime.now(),
+                        "status", 400,
+                        "error", "Erro de validação",
+                        "messages", errors
+                )
+        );
+    }
+
     @ExceptionHandler(IllegalStateException.class)
     public ResponseEntity<Map<String, Object>> handleIllegalState(IllegalStateException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
@@ -37,7 +59,6 @@ public class GlobalExceptionHandler {
         );
     }
 
-    // Fallback para qualquer exceção não tratada
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, Object>> handleGeneric(Exception ex) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
