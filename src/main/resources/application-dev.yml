@@ -22,3 +22,12 @@ logging:
 
 validador-cpf:
   url: http://localhost:3000/users
+
+
+springdoc:
+  swagger-ui:
+    display-request-duration: true
+    disable-swagger-default-url: true
+    use-root-path: true
+    configUrl: /v3/api-docs/swagger-config
+    url: /v3/api-docs
