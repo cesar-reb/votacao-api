@@ -1,5 +1,6 @@
 package com.cesar.votacao.api.application.service;
 
+import com.cesar.votacao.api.domain.exception.SessaoNotFoundException;
 import com.cesar.votacao.api.domain.model.Pauta;
 import com.cesar.votacao.api.domain.model.ResultadoVotacao;
 import com.cesar.votacao.api.domain.model.SessaoVotacao;
@@ -174,7 +175,7 @@ class VotacaoUseCaseImplTest {
             given(pautaRepository.findById(pautaId)).willReturn(Optional.empty());
 
             assertThatThrownBy(() -> votacaoUseCase.obterResultado(pautaId))
-                    .isInstanceOf(IllegalArgumentException.class)
+                    .isInstanceOf(SessaoNotFoundException.class)
                     .hasMessage("Pauta não encontrada com ID: " + pautaId);
         }
 

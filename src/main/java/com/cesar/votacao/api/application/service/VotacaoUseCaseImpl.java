@@ -1,9 +1,10 @@
 package com.cesar.votacao.api.application.service;
 
-import com.cesar.votacao.api.port.dto.ContagemVotoProjecao;
+import com.cesar.votacao.api.domain.exception.SessaoNotFoundException;
 import com.cesar.votacao.api.domain.model.ResultadoVotacao;
 import com.cesar.votacao.api.domain.model.SessaoVotacao;
 import com.cesar.votacao.api.domain.model.Voto;
+import com.cesar.votacao.api.port.dto.ContagemVotoProjecao;
 import com.cesar.votacao.api.port.in.VotacaoUseCase;
 import com.cesar.votacao.api.port.out.PautaRepository;
 import com.cesar.votacao.api.port.out.ValidadorCPF;
@@ -41,7 +42,7 @@ public class VotacaoUseCaseImpl implements VotacaoUseCase {
     @Override
     public ResultadoVotacao obterResultado(Long pautaId) {
         var pauta = pautaRepository.findById(pautaId)
-                .orElseThrow(() -> new IllegalArgumentException("Pauta não encontrada com ID: " + pautaId));
+                .orElseThrow(() -> new SessaoNotFoundException("Pauta não encontrada com ID: " + pautaId));
 
         var sessao = pauta.getSessao();
         assegurarPautaComSecao(sessao);
